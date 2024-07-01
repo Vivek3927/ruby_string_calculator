@@ -4,9 +4,12 @@ require 'byebug'
 class StringCalculator
 	def add(numbers)
 		return 0 if numbers.empty?
-		return numbers.to_i if numbers.length == 1
 
-		numbers.split(',').map(&:to_i).sum
-		numbers.split(/,|\n/).map(&:to_i).sum
+		delimiter = /,|\n/
+		if numbers.start_with?("//")
+			delimiter, numbers = numbers[2..].split("\n", 2)
+			delimiter = Regexp.escape(delimiter)
+		end
+		numbers.split(/#{delimiter}/).map(&:to_i).sum
 	end
 end
