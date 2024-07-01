@@ -10,6 +10,10 @@ class StringCalculator
 			delimiter, numbers = numbers[2..].split("\n", 2)
 			delimiter = Regexp.escape(delimiter)
 		end
-		numbers.split(/#{delimiter}/).map(&:to_i).sum
+		numbers = numbers.split(/#{delimiter}/).map(&:to_i)
+		negatives = numbers.select(&:negative?)
+		raise "negative numbers not allowed: #{negatives.join(', ')}" if negatives.any?
+
+		numbers.sum
 	end
 end
