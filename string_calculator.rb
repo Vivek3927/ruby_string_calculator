@@ -1,5 +1,4 @@
 # String calculator for add numbers
-require 'byebug'
 
 class StringCalculator
 	def add(numbers)
